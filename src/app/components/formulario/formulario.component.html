@@ -1,0 +1,86 @@
+<section class="container__login">
+  <section class="content">
+    <main class="container__main">
+      <form [formGroup]="formularioContacto" (ngSubmit)="enviarContacto()">
+        <legend>
+          <h1 class="title">Inicia sesión</h1>
+          <p class="parraph">Si ya eres socio, ingresa tus datos de siempre.</p>
+        </legend>
+        <section class="container__input">
+          <div>
+            <input
+              type="text"
+              autoComplete="off"
+              placeholder="Nombre"
+              formControlName="nombre"
+              [ngClass]="(formularioContacto.get('nombre')?.errors?.['required']) ?'input__error':'input'"
+            />
+          </div>
+          <span
+            class="text__error"
+            *ngIf="formularioContacto.get('nombre')?.errors?.['required']"
+          >
+            Este campo es obligatorio
+          </span>
+        </section>
+        <section class="container__input">
+          <div>
+            <input
+              type="text"
+              autoComplete="off"
+              placeholder="Email o número de socio"
+              formControlName="email"
+              [ngClass]="(formularioContacto.get('email')?.errors?.['required'] || formularioContacto.get('email')?.errors?.['email']) ?'input__error':'input'"
+            />
+          </div>
+          <span
+            class="text__error"
+            *ngIf="formularioContacto.get('email')?.errors?.['required']"
+          >
+            Este campo es obligatorio
+          </span>
+          <p
+            class="text__error"
+            *ngIf="formularioContacto.get('email')?.errors?.['email']"
+          >
+            El email o número de socio que ingresaste es incorrecto
+          </p>
+        </section>
+        <section class="container__input">
+          <input
+            type="text"
+            autoComplete="off"
+            placeholder="Contraseña"
+            formControlName="contrasena"
+            [ngClass]="(formularioContacto.get('contrasena')?.errors?.['required'] ||formularioContacto.get('contrasena')?.errors?.['minlength']) ?'input__error':'input'"
+          />
+        </section>
+        <span
+          *ngIf="formularioContacto.get('contrasena')?.errors?.['required']"
+          class="text__error"
+        >
+          Este campo es obligatorio
+        </span>
+        <span
+          class="text__error"
+          *ngIf="formularioContacto.get('contrasena')?.errors?.['minlength']"
+        >
+          Este campo debe tener mínimo 8 caracteres
+        </span>
+        <p class="ancla">Recupera el acceso a tu cuenta</p>
+        <button
+          class="button button__login"
+          [disabled]="formularioContacto.valid"
+        >
+          Iniciar sesión
+        </button>
+      </form>
+      <footer>
+        <p class="footer__parraph">
+          ¿No estás registrado?
+          <span class="ancla footer__register">Crea una cuenta</span>
+        </p>
+      </footer>
+    </main>
+  </section>
+</section>
